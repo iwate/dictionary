@@ -1,6 +1,6 @@
 import { createEffect, Match, Show, Switch } from 'solid-js';
 import {createStore, produce} from 'solid-js/store';
-
+import ngsl from './ngsl.json';
 function App() {
   const [state, setState] = createStore({
     input: '',
@@ -16,8 +16,13 @@ function App() {
     adv: '',
     pre: '',
     noun: '',
+    pronoun: '',
     conj: '',
     subConj: '',
+    relpronoun: '',
+    reladj: '',
+    reladv: '',
+    article: '',
     memo: '',
     data: [],
     initialized: false,
@@ -30,7 +35,7 @@ function App() {
     }))
   }
   const search = () => {
-    const item = state.data.find(d => d.input === state.input);
+    const item = state.data.words.find(d => d.input === state.input);
     if (item) {
       setState(() => item);
     }
@@ -43,6 +48,9 @@ function App() {
   }
   const searchSkell = () => {
     setAside('skell', `https://skell.sketchengine.eu/#result?lang=en&query=${state.input}&f=concordance`);
+  }
+  const listNGSL = () => {
+    setAside('ngsl', null);
   }
   const fileOptions = {
     types: [
@@ -59,17 +67,22 @@ function App() {
     const [handle] = await window.showOpenFilePicker(fileOptions);
     const file = await handle.getFile();
     const json = await file.text();
-    let data = [];
-    try { data = JSON.parse(json); }catch{}
+    let data = {
+      words: [],
+      ngslIndex: 0,
+    };
+    try { data = Object.assign(data, JSON.parse(json)); }catch{}
     setState(() => ({
       initialized: true,
+      input: ngsl[data.ngslIndex],
       data
-    }))
+    }));
+    search();
   }
   let fileHandle;
   const save = async () => {
     setState(produce(state => {
-      const item = state.data.find(d => d.input === state.input);
+      const item = state.data.words.find(d => d.input === state.input);
       if (item) {
         item.v1 = state.v1;
         item.v2 = state.v2;
@@ -81,11 +94,16 @@ function App() {
         item.adv = state.adv;
         item.pre = state.pre;
         item.noun = state.noun;
+        item.pronoun = state.pronoun;
         item.conj = state.conj;
         item.subConj = state.subConj;
+        item.relpronoun = state.relpronoun;
+        item.reladj = state.reladj;
+        item.reladv = state.reladv;
+        item.article = state.article;
         item.memo = state.memo;
       } else {
-        state.data.push({
+        state.data.words.push({
           input: state.input,
           v1: state.v1,
           v2: state.v2,
@@ -97,8 +115,13 @@ function App() {
           adv: state.adv,
           pre: state.pre,
           noun: state.noun,
+          pronoun: state.pronoun,
           conj: state.conj,
           subConj: state.subConj,
+          relpronoun: state.relpronoun,
+          reladj: state.reladj,
+          reladv: state.reladv,
+          article: state.article,
           memo: state.memo,
         })
       }
@@ -113,7 +136,46 @@ function App() {
       lastModified: new Date()
     }))
   }
-  
+  const nextNgsl = () => {
+    if (state.data.ngslIndex < ngsl.length) {
+      setState(produce(state => {
+        state.data.ngslIndex = state.data.ngslIndex + 1;
+      }));
+      input(ngsl[state.data.ngslIndex]);
+    }
+  }
+  const prevNgsl = () => {
+    if (state.data.ngslIndex > 0) {
+      setState(produce(state => {
+        state.data.ngslIndex = state.data.ngslIndex - 1;
+      }));
+      input(ngsl[state.data.ngslIndex]);
+    }
+  }
+  const input = (value) => {
+    setState(() => ({
+      input: value,
+      v1: '',
+      v2: '',
+      v3: '',
+      v4: '',
+      v5: '',
+      vc: '',
+      adj: '',
+      adv: '',
+      pre: '',
+      noun: '',
+      pronoun: '',
+      conj: '',
+      subConj: '',
+      relpronoun: '',
+      reladj: '',
+      reladv: '',
+      article: '',
+      memo: '',
+    }));
+    search();
+  }
   return (<>
     <Show when={!state.initialized}>
       <button onClick={load}>Select Saved File</button>
@@ -123,29 +185,17 @@ function App() {
     <Show when={state.initialized}>
       <div id="app">
         <main>
-          <input onInput={e => {
-            setState(() => ({
-              input: e.currentTarget.value,
-              v1: '',
-              v2: '',
-              v3: '',
-              v4: '',
-              v5: '',
-              vc: '',
-              adj: '',
-              adv: '',
-              pre: '',
-              noun: '',
-              conj: '',
-              subConj: '',
-              memo: '',
-            }));
-            search();
-          }}/>
+          <div>
+            <button onClick={prevNgsl}>Prev</button>
+            <button onClick={listNGSL}>NGSL #{state.data?.ngslIndex + 1}</button>
+            <button onClick={nextNgsl}>Next</button>
+          </div>
+          <input value={state.input} onInput={e => input(e.currentTarget.value)}/>
           <Show when={state.input}>
               <button onClick={searchWeblio}>weblio</button>
               <button onClick={searchYouglish}>YouGlish</button>
               <button onClick={searchSkell}>SKELL</button>
+            
             <dl>
               <dt>
                 <label><input type="checkbox" checked={!!state.v1} disabled/> Action Verb: S {state.input}</label>
@@ -208,6 +258,12 @@ function App() {
                 <input value={state.noun} onInput={e => setState(() => ({noun: e.currentTarget.value}))}/>
               </dd>
               <dt>
+                <label><input type="checkbox" checked={!!state.pronoun} disabled/> Pronoun</label>
+              </dt>
+              <dd>
+                <input value={state.pronoun} onInput={e => setState(() => ({pronoun: e.currentTarget.value}))}/>
+              </dd>
+              <dt>
                 <label><input type="checkbox" checked={!!state.conj} disabled/> Conjunction</label>
               </dt>
               <dd>
@@ -219,6 +275,30 @@ function App() {
               <dd>
                 <input value={state.subConj} onInput={e => setState(() => ({subConj: e.currentTarget.value}))}/>
               </dd>
+              <dt>
+                <label><input type="checkbox" checked={!!state.relpronoun} disabled/> Relative Pronoun</label>
+              </dt>
+              <dd>
+                <input value={state.relpronoun} onInput={e => setState(() => ({relpronoun: e.currentTarget.value}))}/>
+              </dd>
+              <dt>
+                <label><input type="checkbox" checked={!!state.reladj} disabled/> Relative Adjective</label>
+              </dt>
+              <dd>
+                <input value={state.reladj} onInput={e => setState(() => ({reladj: e.currentTarget.value}))}/>
+              </dd>
+              <dt>
+                <label><input type="checkbox" checked={!!state.reladv} disabled/> Relative Adverb</label>
+              </dt>
+              <dd>
+                <input value={state.reladv} onInput={e => setState(() => ({reladv: e.currentTarget.value}))}/>
+              </dd>
+              <dt>
+                <label><input type="checkbox" checked={!!state.article} disabled/> Article</label>
+              </dt>
+              <dd>
+                <input value={state.article} onInput={e => setState(() => ({article: e.currentTarget.value}))}/>
+              </dd>
             </dl>
             <textarea value={state.memo} onInput={e => setState(() => ({memo: e.currentTarget.value}))}></textarea>
             <button onClick={save}>Save</button>
@@ -226,6 +306,15 @@ function App() {
           </Show>
         </main>
         <aside>
+          <Switch>
+            <Match when={state.method === 'ngsl'}>
+              <ol class="ngsl-list">
+                <For each={ngsl}>
+                  {(item, i) => <li>{item}</li>}
+                </For>
+              </ol>
+            </Match>
+          </Switch>
           <Show when={state.src}>
             <iframe src={state.src} frameborder="0" noopener noreferer></iframe>
           </Show>
