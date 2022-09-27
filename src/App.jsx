@@ -313,6 +313,7 @@ function App() {
             </dl>
             <textarea value={state.memo} onInput={e => setState(() => ({memo: e.currentTarget.value}))}></textarea>
             <button onClick={save}>Save</button>
+            <button onClick={() => document.querySelector('main').scroll(0,0)}>Scroll Top</button>
             <div>{state.lastModified}</div>
           </Show>
         </main>
