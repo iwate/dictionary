@@ -12,6 +12,7 @@ function App() {
     v4: '',
     v5: '',
     vc: '',
+    va: '',
     adj: '',
     adv: '',
     pre: '',
@@ -90,6 +91,7 @@ function App() {
         item.v4 = state.v4;
         item.v5 = state.v5;
         item.vc = state.vc;
+        item.va = state.va;
         item.adj = state.adj;
         item.adv = state.adv;
         item.pre = state.pre;
@@ -111,6 +113,7 @@ function App() {
           v4: state.v4,
           v5: state.v5,
           vc: state.vc,
+          va: state.va,
           adj: state.adj,
           adv: state.adv,
           pre: state.pre,
@@ -161,6 +164,7 @@ function App() {
       v4: '',
       v5: '',
       vc: '',
+      va: '',
       adj: '',
       adv: '',
       pre: '',
@@ -232,6 +236,13 @@ function App() {
               </dt>
               <dd>
                 <input value={state.vc} onInput={e => setState(() => ({vc: e.currentTarget.value}))}/>
+              </dd>
+              
+              <dt>
+                <label><input type="checkbox" checked={!!state.va} disabled/> Auxiliary  Verb</label>
+              </dt>
+              <dd>
+                <input value={state.va} onInput={e => setState(() => ({va: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.adj} disabled/> Adjective</label>
