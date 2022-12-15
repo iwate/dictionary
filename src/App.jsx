@@ -322,7 +322,7 @@ function App() {
             <Match when={state.method === 'ngsl'}>
               <ol class="ngsl-list">
                 <For each={ngsl}>
-                  {(item, i) => <li>{item}</li>}
+                  {(item, i) => <li onClick={()=>input(item)}>{item}</li>}
                 </For>
               </ol>
             </Match>
