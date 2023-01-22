@@ -40,6 +40,12 @@ function App() {
     if (item) {
       setState(() => item);
     }
+    const index = ngsl.indexOf(state.input);
+    if (index != -1) {
+      setState(produce(state => {
+        state.data.ngslIndex = index;
+      }));
+    }
   }
   const searchWeblio = () => {
     setAside('weblio', `https://ejje.weblio.jp/content/${state.input}`);
