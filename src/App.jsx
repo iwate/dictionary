@@ -211,104 +211,104 @@ function App() {
                 <label><input type="checkbox" checked={!!state.v1} disabled/> Action Verb: S {state.input}</label>
               </dt>
               <dd>
-                <input value={state.v1} onInput={e => setState(() => ({v1: e.currentTarget.value}))}/>
+                <textarea value={state.v1} onInput={e => setState(() => ({v1: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.v2} disabled/> Linking Verb: S {state.input} C</label>
               </dt>
               <dd>
-                <input value={state.v2} onInput={e => setState(() => ({v2: e.currentTarget.value}))}/>
+                <textarea value={state.v2} onInput={e => setState(() => ({v2: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.v3} disabled/> Monotransive Verb: S {state.input} O</label>
               </dt>
               <dd>
-                <input value={state.v3} onInput={e => setState(() => ({v3: e.currentTarget.value}))}/>
+                <textarea value={state.v3} onInput={e => setState(() => ({v3: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.v4} disabled/> Ditransive Verb: S {state.input} O1 O2</label>
               </dt>
               <dd>
-                <input value={state.v4} onInput={e => setState(() => ({v4: e.currentTarget.value}))}/>
+                <textarea value={state.v4} onInput={e => setState(() => ({v4: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.v5} disabled/> Complex Verb: S {state.input} O C</label>
               </dt>
               <dd>
-                <input value={state.v5} onInput={e => setState(() => ({v5: e.currentTarget.value}))}/>
+                <textarea value={state.v5} onInput={e => setState(() => ({v5: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.vc} disabled/> Causative Verb: S {state.input} O V</label>
               </dt>
               <dd>
-                <input value={state.vc} onInput={e => setState(() => ({vc: e.currentTarget.value}))}/>
+                <textarea value={state.vc} onInput={e => setState(() => ({vc: e.currentTarget.value}))}/>
               </dd>
               
               <dt>
                 <label><input type="checkbox" checked={!!state.va} disabled/> Auxiliary  Verb</label>
               </dt>
               <dd>
-                <input value={state.va} onInput={e => setState(() => ({va: e.currentTarget.value}))}/>
+                <textarea value={state.va} onInput={e => setState(() => ({va: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.adj} disabled/> Adjective</label>
               </dt>
               <dd>
-                <input value={state.adj} onInput={e => setState(() => ({adj: e.currentTarget.value}))}/>
+                <textarea value={state.adj} onInput={e => setState(() => ({adj: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.adv} disabled/> Adverb</label>
               </dt>
               <dd>
-                <input value={state.adv} onInput={e => setState(() => ({adv: e.currentTarget.value}))}/>
+                <textarea value={state.adv} onInput={e => setState(() => ({adv: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.pre} disabled/> Pre-position</label>
               </dt>
               <dd>
-                <input value={state.pre} onInput={e => setState(() => ({pre: e.currentTarget.value}))}/>
+                <textarea value={state.pre} onInput={e => setState(() => ({pre: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.noun} disabled/> Noun</label>
               </dt>
               <dd>
-                <input value={state.noun} onInput={e => setState(() => ({noun: e.currentTarget.value}))}/>
+                <textarea value={state.noun} onInput={e => setState(() => ({noun: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.pronoun} disabled/> Pronoun</label>
               </dt>
               <dd>
-                <input value={state.pronoun} onInput={e => setState(() => ({pronoun: e.currentTarget.value}))}/>
+                <textarea value={state.pronoun} onInput={e => setState(() => ({pronoun: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.conj} disabled/> Conjunction</label>
               </dt>
               <dd>
-                <input value={state.conj} onInput={e => setState(() => ({conj: e.currentTarget.value}))}/>
+                <textarea value={state.conj} onInput={e => setState(() => ({conj: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.subConj} disabled/> Subordinating Conjunction</label>
               </dt>
               <dd>
-                <input value={state.subConj} onInput={e => setState(() => ({subConj: e.currentTarget.value}))}/>
+                <textarea value={state.subConj} onInput={e => setState(() => ({subConj: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.relpronoun} disabled/> Relative Pronoun</label>
               </dt>
               <dd>
-                <input value={state.relpronoun} onInput={e => setState(() => ({relpronoun: e.currentTarget.value}))}/>
+                <textarea value={state.relpronoun} onInput={e => setState(() => ({relpronoun: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.reladj} disabled/> Relative Adjective</label>
               </dt>
               <dd>
-                <input value={state.reladj} onInput={e => setState(() => ({reladj: e.currentTarget.value}))}/>
+                <textarea value={state.reladj} onInput={e => setState(() => ({reladj: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.reladv} disabled/> Relative Adverb</label>
               </dt>
               <dd>
-                <input value={state.reladv} onInput={e => setState(() => ({reladv: e.currentTarget.value}))}/>
+                <textarea value={state.reladv} onInput={e => setState(() => ({reladv: e.currentTarget.value}))}/>
               </dd>
               <dt>
                 <label><input type="checkbox" checked={!!state.article} disabled/> Article</label>
@@ -318,8 +318,10 @@ function App() {
               </dd>
             </dl>
             <textarea value={state.memo} onInput={e => setState(() => ({memo: e.currentTarget.value}))}></textarea>
-            <button onClick={save}>Save</button>
-            <button onClick={() => document.querySelector('main').scroll(0,0)}>Scroll Top</button>
+            <footer>
+              <button onClick={save}>Save</button>
+              <button onClick={() => document.querySelector('main').scroll(0,0)}>Scroll Top</button>
+            </footer>
             <div>{state.lastModified}</div>
           </Show>
         </main>
